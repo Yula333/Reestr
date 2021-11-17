@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление модели товара</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div class="text-center"><h2>Добавление модели товара</h2></div>
+
+    <form th:action="@{/categories/brands/models/save}"  th:object="${modelOfBrand}" method="post"
+          style="max-width: 500px; margin: 0 auto;">
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Вид техники:</label>
+                <div class="col-sm-8">
+                    <select th:field="*{category}" class="form-control" required>
+                        <th:block th:each="el : ${listCategories}">
+                            <option th:text="${el.name}" th:value="${el.id}"/>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Бренд:</label>
+                    <div class="col-sm-8">
+                        <select th:field="*{brand}" class="form-control" required>
+                            <th:block th:each="br : ${listBrands}">
+                                <option th:text="${br.name}" th:value="${br.id}"/>
+                            </th:block>
+                        </select>
+                    </div>
+                </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Наименование модели:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{name}" class="form-control" required minlength="1" maxlength="30"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Серийный номер:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{number}" class="form-control" required minlength="2" maxlength="30"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Цвет:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{color}" class="form-control" required minlength="1" maxlength="30"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Размер:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{size}" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Цена:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{price}" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Дополнительные характеристики:</label>
+                <div class="col-sm-8">
+                    <input type="text" name="attributeName" placeholder="Характеристика" class="form-control" required/>
+                </div>
+                <div class="col-sm-12">
+                    <input type="text" name="attributeValue" placeholder="Описание" class="form-control" required/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Дополнительные характеристики:</label>
+                <div class="col-sm-8">
+                    <input type="text" name="attributeName" placeholder="Характеристика" class="form-control" required/>
+                </div>
+                <div class="col-sm-12">
+                    <input type="text" name="attributeValue" placeholder="Описание" class="form-control" required/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Наличие товара:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{availability}" class="form-control"/>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary m-2">Сохранить</button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Вернуться в список моделей</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location = "[[@{/categories/brands/models}]]";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список техники</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container-fluid text-center">
+    <br/>
+    <div><h2>Cписок техники</h2></div>
+
+    <div class="m-2">
+        <a class="h3" th:href="@{/categories/brands/new}">Добавить позицию в список</a>
+    </div>
+
+    <form class="m-2"  th:action="@{/categories/brands}">
+        <input  type="text"  name="name" placeholder="Введите наименование..."/>
+        <input type="submit" value="Поиск" />
+    </form >
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Наименование</th>
+            <th>Вид техники</th>
+            <th>Страна производитель</th>
+            <th>Фирма производитель</th>
+            <th>Заказ онлайн (да/нет)</th>
+            <th>Рассрочка (да/нет) </th>
+            <th>Модели</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="brand : ${listAllBrands}">
+            <tr>
+                <td>[[${brand.id}]]</td>
+                <td>[[${brand.name}]]</td>
+                <td>[[${brand.category}]]</td>
+                <td>[[${brand.country}]]</td>
+                <td>[[${brand.company}]]</td>
+                <td>[[${brand.online}]]</td>
+                <td>[[${brand.installPayment}]]</td>
+                <td >
+                    <a class="h4 mr-3" th:href="@{'/categories/brands/models/' + ${brand.id}}">Модели</a>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    </h2>
+    <div class="m-2">
+        <a class="h3" th:href="@{/categories/brands/models}">Посмотреть весь список моделей</a>
+    </div>
+</div>
+</body>
+</html>

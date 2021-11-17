@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление товара</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div th:if="${brand.id == null}"><h2>Добавление техники</h2></div>
+
+    <form th:action="@{/categories/brands/save}"  th:object="${brand}" method="post"
+          style="max-width: 500px; margin: 0 auto;">
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Вид техники:</label>
+                <div class="col-sm-8">
+                    <select th:field="*{category}" class="form-control" required>
+                        <th:block th:each="el : ${listCategories}">
+                            <option th:text="${el.name}" th:value="${el.id}"/>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Наименование:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{name}" class="form-control" minlength="1" maxlength="30"  required />
+                </div>
+            </div>
+            <div class  ="form-group row">
+                <label class="col-sm-4 col-form-label">Страна производитель:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{country}" class="form-control" required minlength="2" maxlength="30"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Фирма производитель:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{company}" class="form-control" required minlength="1" maxlength="30"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Возможность заказа онлайн:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{online}" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Возможность оформления рассрочки:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{installPayment}" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Модели в наличии:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{modelsInStock}" class="form-control"/>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary m-2">Сохранить</button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Вернуться в список товаров</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location = "[[@{/categories/brands}]]";
+    }
+</script>
+</body>
+</html>

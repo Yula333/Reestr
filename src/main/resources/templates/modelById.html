@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Модели по выбранному товару</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container-fluid text-center">
+    <br/>
+    <div><h2>Модельный ряд техники</h2></div>
+
+    <div class="m-2">
+        <a class="h3" th:href="@{/categories/brands/models/new}">Добавить модель</a>
+    </div>
+
+<!--    <form class="m-2" th:action="@{/categories/brands/models}" method="get">-->
+<!--        <input id="txtSearch" type="text" name="keyword" placeholder="Введите наименование..."/>-->
+<!--        <button type="submit">Поиск по наименованию</button>-->
+<!--    </form>-->
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Наименование модели</th>
+            <th>Серийный номер</th>
+            <th>Вид техники</th>
+            <th>Цвет</th>
+            <th>Размер</th>
+            <th>Цена</th>
+            <th>Наличие товара (Да/Нет)</th>
+            <th>Дополнительные характеристики</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="el : ${listBrand}">
+            <tr>
+                <td>[[${el.id}]]</td>
+                <td>[[${el.name}]]</td>
+                <td>[[${el.number}]]</td>
+                <td>[[${el.category.name}]]</td>
+                <td>[[${el.color}]]</td>
+                <td>[[${el.size}]]</td>
+                <td>[[${el.price}]]</td>
+                <td>[[${el.availability}]]</td>
+                <td>[[${el.attributes}]]</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    </h2>
+</div>
+</body>
+</html>
